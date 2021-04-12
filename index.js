@@ -4,10 +4,10 @@ const socket = require("socket.io");
 const cors = require("cors");
 
 // app setup
-const port = process.env.PORT || 1234;
+const port = process.env.PORT || 8080;
 app.get('/test', (req, res) =>
 {
-  res.send(" new Test")
+  res.send("newer")
 })
 const server = app.listen(port, () =>
   console.log(`listening to request on port ${port}`)
