@@ -10,8 +10,8 @@ app.get('/test', (req, res) =>
 {
   res.send("newest")
 })
-
-app.use(express.static(path.join(__dirname, "../rafaflix/build")));
+console.log(path.join(__dirname, "../rafaflix/build"));
+app.use(express.static(path.join(__dirname, "../rafachess/build")));
 const server = app.listen(port, () =>
   console.log(`listening to request on port ${port}`)
 );
