@@ -7,14 +7,16 @@ const cors = require("cors");
 const port = process.env.PORT || 8080;
 app.get('/test', (req, res) =>
 {
-  res.send("newer")
+  res.send("newest")
 })
 
 app.use(express.static(path.join(__dirname, "../rafaflix/build")));
 const server = app.listen(port, () =>
   console.log(`listening to request on port ${port}`)
 );
-
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "../rafachess/build", "index.html"));
+});
 
 app.use(cors())
 // app.use(express.static("public"));
