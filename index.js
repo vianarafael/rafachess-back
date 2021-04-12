@@ -7,7 +7,7 @@ const cors = require("cors");
 const port = process.env.PORT || 1234;
 app.get('/test', (req, res) =>
 {
-  res.send("Test")
+  res.send(" new Test")
 })
 const server = app.listen(port, () =>
   console.log(`listening to request on port ${port}`)
@@ -19,8 +19,8 @@ app.use(cors())
 
 // socket setup
 const io = socket(server, {
-  cors: {
-    origin: "http://localhost:3000",
+    cors: {
+    origin: "http://3.141.23.100",
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,
