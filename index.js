@@ -28,13 +28,22 @@ const io = socket(server, {
 
 let numClients = 0;
 
+let gameRoom = 0
+
 io.on("connection", (socket) => {
-  console.log("made socket connection");
+  console.log("made socket connection", socket.id);
   numClients++
   console.log(numClients)
-  if (numClients > 2) numClients = 1
-  io.emit('stats', numClients)
+  if (numClients > 2)
+  {
+    numClients = 1;
+    gameRoom++
+  }
+  socket.join(gameRoom)
+  io.emit('stats', { numClients, gameRoom}) 
   socket.on("move", (data) => {
-    io.emit("move", data);
+    // io.emit("move", data);
+
+    socket.to(data.gameRoom).emit("move", data)
   });
 });
