@@ -5,16 +5,14 @@ const cors = require("cors");
 
 // app setup
 const port = process.env.PORT || 1234;
-app.get('/test', (req, res) =>
-{
-  res.send("Test")
-})
+app.get("/test", (req, res) => {
+  res.send("Test");
+});
 const server = app.listen(port, () =>
   console.log(`listening to request on port ${port}`)
 );
 
-
-app.use(cors())
+app.use(cors());
 
 // socket setup
 const io = socket(server, {
@@ -28,22 +26,21 @@ const io = socket(server, {
 
 let numClients = 0;
 
-let gameRoom = 0
+let gameRoom = 0;
 
 io.on("connection", (socket) => {
   console.log("made socket connection", socket.id);
-  numClients++
-  console.log(numClients)
-  if (numClients > 2)
-  {
+  numClients++;
+  console.log(numClients);
+  if (numClients > 2) {
     numClients = 1;
-    gameRoom++
+    gameRoom++;
   }
-  socket.join(gameRoom);
-  io.emit('stats', { numClients, gameRoom}) 
+  //socket.join(gameRoom);
+  io.emit("stats", { numClients, gameRoom });
   socket.on("move", (data) => {
-    // io.emit("move", data);
-    console.log('data', data)
-    socket.to(data.gameRoom).emit("move", data)
+    io.emit("move", data);
+    console.log("data", data);
+    // socket.to(data.gameRoom).emit("move", data);
   });
 });
