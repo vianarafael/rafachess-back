@@ -32,15 +32,16 @@ io.on("connection", (socket) => {
   console.log("made socket connection", socket.id);
   numClients++;
   console.log(numClients);
+
   if (numClients > 2) {
     numClients = 1;
     gameRoom++;
   }
-  //socket.join(gameRoom);
+  socket.join(gameRoom);
   io.emit("stats", { numClients, gameRoom });
+
   socket.on("move", (data) => {
-    io.emit("move", data);
-    console.log("data", data);
-    // socket.to(data.gameRoom).emit("move", data);
+    console.log(data);
+    socket.to(data.gameRoom).emit("move", data);
   });
 });
