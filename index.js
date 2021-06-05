@@ -24,24 +24,23 @@ const io = socket(server, {
   },
 });
 
-let numClients = 0;
+let numClients = 1;
 
-let gameRoom = 0;
+let gameRoom = Math.random();
 
 io.on("connection", (socket) => {
   console.log("made socket connection", socket.id);
   numClients++;
-  console.log(numClients);
 
   if (numClients > 2) {
     numClients = 1;
-    gameRoom++;
+    gameRoom = Math.random();
   }
+
   socket.join(gameRoom);
   io.emit("stats", { numClients, gameRoom });
 
   socket.on("move", (data) => {
-    console.log(data);
-    socket.to(data.gameRoom).emit("move", data);
+    if (data.gameRoom) io.to(data.gameRoom).emit("move", data);
   });
 });
