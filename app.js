@@ -5,8 +5,8 @@ const cors = require("cors");
 
 // app setup
 const port = 3001;
-app.get("/test", (req, res) => {
-  res.send("Test");
+app.get("/", (req, res) => {
+  res.send("<h1>Test</h1>");
 });
 const server = app.listen(port, () =>
   console.log(`listening to request on port ${port}`)
