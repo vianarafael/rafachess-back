@@ -8,7 +8,7 @@ const port = process.env.PORT || 1234;
 app.get("/test", (req, res) => {
   res.send("Test");
 });
-const server = app.listen(1234, () =>
+const server = app.listen(3000, () =>
   console.log(`listening to request on port ${port}`)
 );
 
