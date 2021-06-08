@@ -4,8 +4,8 @@ const socket = require("socket.io");
 const cors = require("cors");
 
 // app setup
-const port = 3001;
-app.get("/", (req, res) => {
+const port = process.env.PORT || 1234;
+app.get("/test", (req, res) => {
   res.send("<h1>Test</h1>");
 });
 const server = app.listen(port, () =>
@@ -17,7 +17,7 @@ app.use(cors());
 // socket setup
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://multi-chess.s3.us-east-2.amazonaws.com/index.html",
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,
